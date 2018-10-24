@@ -19,27 +19,25 @@ class CalcStore {
     }
 
     @action pressAnOperant = (operator) => {
-        if(this.operator === null && operator != "Clr"){
+        if(this.operants[operator] && this.operator != null){
+            this.value = this.operator.calcFunc(this.value, parseInt(this.currentOperand));
+            this.operator = this.operants[operator]
+            this.display = this.value + this.operator.op
+        }else if(this.operator === null && operator != "Clr"){
             this.operator = this.operants[operator]
             this.value = (parseInt(this.currentOperand) || this.value);
-            this.currentOperand = ""
             this.display = this.value + this.operator.op
-        }else if(operator === "Clr"){
-            this.display = "";
-            this.currentOperand = "";
-            this.operator = null;
-            this.value = 0;
-        }else {
-            this.value = this.operator.calcFunc(this.value, parseInt(this.currentOperand));
-            this.currentOperand = ""
+        }else{
             if (operator === "="){
-                this.operator = null
+                this.value = this.operator.calcFunc(this.value, parseInt(this.currentOperand));
                 this.display = this.value     
-            }else{
-                this.operator = this.operants[operator]
-                this.display = this.value + this.operator.op
+            }else if(operator === "Clr"){
+                this.display = "";
+                this.value = 0;
             }
+            this.operator = null;
         }
+        this.currentOperand = "";
     }
 
 }
