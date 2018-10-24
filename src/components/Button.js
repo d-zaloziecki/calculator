@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
+
 
 class Button extends Component {
-  render() {
+    
+  onClickEvent = (e) => {
+    this.props.onClickEvent(e.target.id)
+  }
+
+    render() {
     return (
-      <div className="button">
-       
+      <div className="button" id={this.props.value} onClick={this.onClickEvent}>
+        {this.props.value}
       </div>
     );
   }

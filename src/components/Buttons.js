@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import Number from './Number';
 import Operator from './Operator';
 
